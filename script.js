@@ -1,24 +1,45 @@
 const html = document.querySelector('html')
-const focoBt = document.querySelector('.app__card-button--foco')
-const shortBt = document.querySelector('.app__card-button--curto')
-const longBt = document.querySelector('.app__card-button--longo')
-const banner = document.querySelector('.app__image')
-const titulo = document.querySelector('.app__title')
+const focoBt = document.querySelector('.app__card-button--foco');
+const shortBt = document.querySelector('.app__card-button--curto');
+const longBt = document.querySelector('.app__card-button--longo');
+const banner = document.querySelector('.app__image');
+const titulo = document.querySelector('.app__title');
+const botoes = document.querySelectorAll('.app__card-button');
+
+
+const switchMusica = document.querySelector("#alternar-musica");
+const musica = new Audio("/AluraCourse/Alura3-ManipulandoElementosNoDOM/Fokus/sons/luna-rise-part-one.mp3");
+musica.loop = true;
+
+switchMusica.addEventListener("change", function() {
+    if(musica.paused){
+        musica.play();
+    }else{
+        musica.pause();
+    }
+})
 
 
 
 focoBt.addEventListener('click', () => {
     alterarContexto('foco')
+    focoBt.classList.add('active')
 })
 shortBt.addEventListener('click', () => {
     alterarContexto('descanso-curto')
+    shortBt.classList.add('active')
 })
 longBt.addEventListener('click', () => {
     alterarContexto('descanso-longo')
+    longBt.classList.add('active')
 })
 
 
 function alterarContexto(contexto) {
+    botoes.forEach(function unactive(botao) {
+        botao.classList.remove('active')
+    })
+
     html.setAttribute('data-contexto', contexto)
     banner.setAttribute('src', `/AluraCourse/Alura3-ManipulandoElementosNoDOM/Fokus/imagens/${contexto}.png`)
 
