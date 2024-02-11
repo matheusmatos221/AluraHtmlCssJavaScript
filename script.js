@@ -10,7 +10,7 @@ const iniciarOuPausarBtnSpan = document.querySelector('#start-pause span');
 const iniciarOuPausarBtnImg = document.querySelector('#start-pause img');
 const tempoNaTela = document.querySelector('#timer');
 
-let tempoRestanteEmSegundos = 5;
+let tempoRestanteEmSegundos = 1500;
 let intervaloId = null;
 
 const pauseAudio = new Audio("/AluraCourse/Alura3-ManipulandoElementosNoDOM/Fokus/sons/pause.mp3");
@@ -117,6 +117,9 @@ startPauseBtn.addEventListener('click', iniciarOuPausar)
 
 
 function mostrarTempo(){
-    const tempo = tempoRestanteEmSegundos
-    tempoNaTela.innerHTML = `${tempo}`
+    const tempo =  new Date(tempoRestanteEmSegundos*1000)  
+    const tempoFormatado = tempo.toLocaleTimeString('pt-Br', {minute: '2-digit', second: "2-digit"})
+    tempoNaTela.innerHTML = `${tempoFormatado}`
 }
+
+mostrarTempo();
