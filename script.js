@@ -6,8 +6,9 @@ const banner = document.querySelector('.app__image');
 const titulo = document.querySelector('.app__title');
 const botoes = document.querySelectorAll('.app__card-button');
 const startPauseBtn = document.querySelector('#start-pause');
-const IniciarOuPausarBtnSpan = document.querySelector('#start-pause span')
-const IniciarOuPausarBtnImg = document.querySelector('#start-pause img')
+const iniciarOuPausarBtnSpan = document.querySelector('#start-pause span');
+const iniciarOuPausarBtnImg = document.querySelector('#start-pause img');
+const tempoNaTela = document.querySelector('#timer');
 
 let tempoRestanteEmSegundos = 5;
 let intervaloId = null;
@@ -81,8 +82,8 @@ function alterarContexto(contexto) {
 
 function zerarIntervaloId() {
     clearInterval(intervaloId)
-    IniciarOuPausarBtnSpan.textContent = "Começar";
-    IniciarOuPausarBtnImg.setAttribute('src', `/AluraCourse/Alura3-ManipulandoElementosNoDOM/Fokus/imagens/play_arrow.png`)
+    iniciarOuPausarBtnSpan.textContent = "Começar";
+    iniciarOuPausarBtnImg.setAttribute('src', `/AluraCourse/Alura3-ManipulandoElementosNoDOM/Fokus/imagens/play_arrow.png`)
     intervaloId = null;
 }
 
@@ -95,8 +96,8 @@ function iniciarOuPausar() {
     }
     playAudio.play();
     intervaloId = setInterval(contagemRegressiva, 1000)
-    IniciarOuPausarBtnSpan.textContent = "Pausar";
-    IniciarOuPausarBtnImg.setAttribute('src', `/AluraCourse/Alura3-ManipulandoElementosNoDOM/Fokus/imagens/pause.png`)
+    iniciarOuPausarBtnSpan.textContent = "Pausar";
+    iniciarOuPausarBtnImg.setAttribute('src', `/AluraCourse/Alura3-ManipulandoElementosNoDOM/Fokus/imagens/pause.png`)
 }
 
 
@@ -109,9 +110,13 @@ const contagemRegressiva = () => {
         return
     }
     tempoRestanteEmSegundos -= 1;
-    console.log('Temporizador: ' + tempoRestanteEmSegundos)
+    mostrarTempo()
 }
 
 startPauseBtn.addEventListener('click', iniciarOuPausar)
 
 
+function mostrarTempo(){
+    const tempo = tempoRestanteEmSegundos
+    tempoNaTela.innerHTML = `${tempo}`
+}
